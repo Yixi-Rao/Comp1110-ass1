@@ -42,7 +42,7 @@ listed.
 Your tutor will mark your assignment by accessing your GitLab repository, so it is essential that you carefully follow
 instructions for setting up and maintaining your repository. You will be marked
 according to **whatever is committed to your repository at the time of the deadline**.
-Since the first assignment is redeemable, **[late extentions
+Since the first assignment is redeemable, **[late extensions
 are not offered and will not be given](https://cs.anu.edu.au/courses/comp1110/deadlines/)**. As always, throughout the course, if
 some significant circumstance arises outside of the course that affects your capacity to complete the course, please carefully follow the ANU's [special consideration process](http://www.anu.edu.au/students/program-administration/assessments-exams/special-assessment-consideration), and your circumstances will be accounted for in your final assessment.
 
@@ -85,7 +85,7 @@ A sample objective shape is shown here:
 ![Objective1](assets/so_1.png)
 
 This is objective 1 from the original board game, and is easy to
-solve.  The placment of the three green dinosaur tiles has be
+solve.  The placement of the three green dinosaur tiles has be
 specified, so the challenge for the player is just to work out how to
 place the red dinosaur tiles correctly.
 
@@ -145,7 +145,7 @@ as shown here:
 All game objectives comprise of islands that are created by joining
 some number of *island centers*, by appropriately placing tiles.
 There are exactly ten island centers, seven centred on the board
-perimiter, thus visible on the outside of the board, and another three
+perimeter, thus visible on the outside of the board, and another three
 in the middle of the board (these island centers only become visible
 once tiles are placed).  The ten island centers are at locations
 `(0,0)`, `(2,0)`, `(4,0)`, `(1,1)`, `(3,1)`, `(0,2)`, `(2,2)`, `(4,2)`,
@@ -227,7 +227,7 @@ First, as with any work you do, you must abide by the principles of
 expect you to demonstrate honesty and integrity in everything you do.
 
 In addition to those ground rules, you are to follow the rules one
-would normaly be subject to in a commercial setting. In particular,
+would normally be subject to in a commercial setting. In particular,
 you may make use of the works of others under two fundamental
 conditions: a) your use of their work must be clearly acknowledged,
 and b) your use of their work must be legal (for example, consistent
@@ -245,7 +245,7 @@ contribution. Therefore, these rules allow you to copy another
 student's work entirely if: a) they gave you permission to do so, and
 b) you acknowledged that you had done so. Notice, however, that if you
 were to do this you would have no original contribution and so would
-recieve no marks for the assigment (but you would not have broken any
+receive no marks for the assignment (but you would not have broken any
 rules either).
 
 ## Evaluation Criteria
