@@ -58,7 +58,7 @@ this assignment comes from their DINOSAURS game.
 ![Game Overview](assets/dinosaurs-game.png)
 
 The game is played by rotating and placing six 1x2-sized tiles on a
-3x2 grid.  Each tile includes one to three paths, which connect its
+3x4 grid.  Each tile includes one to three paths, which connect its
 nearby tiles to each other or the borders.  Also, there is exactly one
 green or red dinosaur on each tile.
 
@@ -124,7 +124,7 @@ each as a png image, named `<objective number>.png`.
 ## Objective Encoding
 
 In our game, the objective of the game is encoded as two strings, one that
-represents the direct connections between islands, and that represents tiles
+represents the direct connections between islands, and another that represents tiles
 that are placed at the start of the game (in the example above, the
 location of tiles `b`, `d`, and `e` are prescribed by the objective) .
 The `Objective` [class](src/comp1110/ass1/Objective.java) has all of
@@ -134,7 +134,7 @@ the objectives encoded for you already (they can be seen visually
 ### Locations
 
 In our game we encode locations as (x, y) coordinates that refer to
-the points on the board where *corners of tiles* might be
+the points on the board where *corners of tiles* may be
 located. There are twenty such locations, `(0,0)` through to `(4,3)`,
 as shown here:
 
@@ -142,9 +142,9 @@ as shown here:
 
 ### Island Centers
 
-All game objectives comprise of islands that are created by joining
+All game objectives comprise islands that are created by joining
 some number of *island centers*, by appropriately placing tiles.
-There are exactly ten island centers, seven centred on the board
+There are exactly ten island centers: seven centered on the board
 perimeter, thus visible on the outside of the board, and another three
 in the middle of the board (these island centers only become visible
 once tiles are placed).  The ten island centers are at locations
