@@ -379,7 +379,7 @@ public class Objective {
      * @return An objective at the appropriate level of difficulty.
      */
     public static Objective newObjective(int difficulty) {
-        assert difficulty >= 1 && difficulty <= 4;
+        assert difficulty >= 0 && difficulty <= 3;
 
         return OBJECTIVES[0]; // FIXME Task 8
     }
