@@ -18,11 +18,20 @@ public class GetSolutionsTest {
         Dinosaurs game = new Dinosaurs(obj);
         Set<String> out = game.getSolutions();
 
-        assertTrue("Expected " + expected.toString() +
-                        " for obj.connections " + obj.getConnectedIslands() +
+      for (String e : expected) {
+        assertTrue("Expected " + e +
+                        " to be in solutions for objective " + obj.getConnectedIslands() +
                         ", but got " + out.toString() + ".",
-                out.toString().compareTo(expected.toString()) == 0
-        );
+                out.contains(e));
+
+      }
+      for (String o : out) {
+        assertTrue("Got " + o +
+                        " among solutions for objective " + obj.getConnectedIslands() +
+                        ", but expected " + expected.toString() + ".",
+                expected.contains(o));
+
+      }
     }
 
     @Test
