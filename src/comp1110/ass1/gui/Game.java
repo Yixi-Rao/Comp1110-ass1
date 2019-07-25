@@ -578,7 +578,7 @@ public class Game extends Application {
     private void newGame() {
         try {
             hideCompletion();
-            dinosaursGame = new Dinosaurs((int) difficulty.getValue());
+            dinosaursGame = new Dinosaurs((int) difficulty.getValue()-1);
             String [] resSet = {""};
             String sol = dinosaursGame.getSolutions().toArray(resSet)[0];
             if (sol != null)
