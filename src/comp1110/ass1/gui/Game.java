@@ -144,7 +144,7 @@ public class Game extends Application {
          * @param y    The y position of the tile
          */
         GTile(int tile, int x, int y) {
-            if (!(tile <= 79 && tile >= 0)) {
+            if (!(tile <= 80 && tile >= 1)) {
                 throw new IllegalArgumentException("Bad tile: \"" + tile + "\"");
             }
 
