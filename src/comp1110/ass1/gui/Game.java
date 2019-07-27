@@ -43,6 +43,7 @@ public class Game extends Application {
     private static final int PLAY_AREA_X = BOARD_X + BOARD_MARGIN;
     private static final int GAME_WIDTH = BOARD_X + BOARD_WIDTH + MARGIN_X;
     private static final int GAME_HEIGHT = 620;
+    private static final long ROTATION_THRESHOLD = 50; // Allow rotation every 50 ms
 
     /* marker for unplaced tiles */
     public static final char NOT_PLACED = 255;
@@ -170,6 +171,8 @@ public class Game extends Application {
         double mouseX, mouseY;      // the last known mouse positions (used when dragging)
         Image[] images = new Image[4];
         int orientation;    // 0=North... 3=West
+        long lastRotationTime = System.currentTimeMillis(); // only allow rotation every ROTATION_THRESHOLD (ms)
+        // This caters for mice which send multiple scroll events per tick.
 
         /**
          * Construct a draggable tile
@@ -192,9 +195,12 @@ public class Game extends Application {
 
             /* event handlers */
             setOnScroll(event -> {            // scroll to change orientation
-                hideCompletion();
-                rotate();
-                event.consume();
+                if (System.currentTimeMillis() - lastRotationTime > ROTATION_THRESHOLD){
+                    lastRotationTime = System.currentTimeMillis();
+                    hideCompletion();
+                    rotate();
+                    event.consume();
+                }
             });
             setOnMousePressed(event -> {      // mouse press indicates begin of drag
                 mouseX = event.getSceneX();
