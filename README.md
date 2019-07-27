@@ -85,7 +85,7 @@ A sample objective shape is shown here:
 ![Objective1](assets/so_1.png)
 
 This is objective 1 from the original board game, and is easy to
-solve.  The placement of the three green dinosaur tiles has be
+solve.  The placement of the three green dinosaur tiles has been
 specified, so the challenge for the player is just to work out how to
 place the red dinosaur tiles correctly.
 
@@ -183,7 +183,7 @@ All direct connections in the sample objective can be encoded as
 connections.
 
 Notice that *indirect* connections are not encoded.
-For example, in the above objective, there is an indirection connection
+For example, in the above objective, there is an indirect connection
 between `(0,0)` and `(2,0)` through island center `(1,1)`, but this
 indirect connection is not encoded since only *direct* connections
 are included in the encoding.
