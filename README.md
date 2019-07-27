@@ -75,14 +75,27 @@ combinations of the 6 pieces and 4 orientations.
 ## Objective
 
 The objective of the game is to place the tiles in such a way as to
-**create a specified shape of islands**, with the special requirement
-that **no dinosaurs of different colors end up on the same island**.   The
-specification of the objective may include the placement of some of
-the six tiles, which makes the objective easier.
+**create a specified shape of islands** (a *topological* constraint),
+with the special requirement that **no dinosaurs of different colors
+end up on the same island** (an *ecological* constraint).  Each
+objective defines a particular topological constraint (i.e. a
+particular arrangement of land and water), and all objectives have the
+same ecological constraint (red and green dinosaurs cannot co-exist on
+the same island).   The following sample objectives illustrate three
+different topological objectives (i.e. three different arrangements of
+land and water).   In each case, the player has to determine where to
+place tiles such that those topological objectives are met, while also
+ensuring the ecological objective is met (red and green dinosaurs
+are always separated by water).
 
-A sample objective shape is shown here:
+![Objective 65](src/comp1110/ass1/gui/assets/65.png) 
+![Objective 68](src/comp1110/ass1/gui/assets/68.png)
+![Objective 72](src/comp1110/ass1/gui/assets/72.png)
 
-![Objective1](assets/so_1.png)
+Some objectives include the placement of some of the six tiles,
+which makes the objective easier.  A sample objective shape is shown here:
+
+![Objective 1](src/comp1110/ass1/gui/assets/01.png)
 
 This is objective 1 from the original board game, and is easy to
 solve.  The placement of the three green dinosaur tiles has been
@@ -121,6 +134,11 @@ You can find visual representations of all of the objectives in the
 `src/comp1110/ass1/gui/assets` [folder](src/comp1110/ass1/gui/assets),
 each as a png image, named `<objective number>.png`.
 
+
+We have provided you with a
+[paper version of the game](assets/papergame.pdf), which you can print
+out and use to help you visualise the game if you wish.
+
 ## Objective Encoding
 
 In our game, the objective of the game is encoded as two strings, one that
@@ -158,9 +176,9 @@ once tiles are placed).  The ten island centers are at locations
 The game objectives are designed such that each objective contains
 exactly six direct connections between the ten island centers.
 
-If we consider the sample objective: 
+If we consider the  objective 1 again: 
 
-![Objective1](assets/so_1.png)
+![Objective 1](src/comp1110/ass1/gui/assets/01.png)
 
 the following pairs of island centers are directly connected:
 
