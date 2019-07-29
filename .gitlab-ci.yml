@@ -114,7 +114,7 @@ task12:
     - comp1110
   stage: test
   script:
-    - java $JAVAFX_OPTIONS -cp $CP org.junit.runner.JUnitCore comp1110.ass1.FindCandidateActionsTest
+    - java $JAVAFX_OPTIONS -cp $CP org.junit.runner.JUnitCore comp1110.ass1.FindCandidatePlacementsTest
   allow_failure: true
   
 task13:
