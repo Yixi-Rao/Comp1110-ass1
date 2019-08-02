@@ -189,6 +189,6 @@ public class ViolatesObjectiveTest {
             "a01Eb02Wc22Ed21We20Ef00W",
             "a11Sb00Wc20Ed01Se31Nf21N",
             "a21Eb22Wc01Sd11Ne00Ef20W",
-            "a11Sb20Wc01Sd00Ee21Wf22W",
+            "a00Wb30Nc01Wd20Ne22Ef02W",
     };
 }
