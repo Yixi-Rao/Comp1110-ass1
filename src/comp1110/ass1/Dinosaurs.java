@@ -196,8 +196,25 @@ public class Dinosaurs {
      * the already placed tiles, and True if there is any overlap.
      */
     public boolean doesPlacementOverlap(String placement) {
-        // FIXME Task 6
+        String state = objective.getInitialState();//use object to get initialstate
+        initializeBoardState(state);
+        Tile t = new Tile(placement);
+        Orientation ori_t = t.getOrientation();
+        int x = t.getLocation().getX();
+        int y = t.getLocation().getY();
+
+        if (ori_t == NORTH || ori_t == SOUTH){
+            if (tiles[y][x] != null || tiles[y+1][x] != null)
+                return true;
+        }
+        else {
+            if (tiles[y][x] != null || tiles[y][x+1] != null ){
+                return true;
+            }
+        }
         return false;
+        // FIXME Task 6
+
     }
 
 
