@@ -118,8 +118,21 @@ public class Dinosaurs {
      * @return  True if the tile is completely within the board, and false otherwise.
      */
     public static boolean isPlacementOnBoard(String placement) {
+        Location l = Tile.placementToLocation(placement);
+        int x = l.getX();
+        int y = l.getY();
+        if (placement.charAt(3) == 'N' ||  placement.charAt(3) == 'S'){
+            if (x + 1 > 4 || y + 2 > 3){
+                return false;
+            }
+        }
+        else {
+            if (x + 2 > 4 || y + 1 > 3){
+                return false;
+            }
+        }
         // FIXME Task 5
-        return false;
+        return true;
     }
 
 
