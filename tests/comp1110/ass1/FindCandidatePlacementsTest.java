@@ -25,7 +25,7 @@ public class FindCandidatePlacementsTest {
                         ", and state " + state +
                         ", and location (" + loc.getX() + ", " + loc.getY() + ")" +
                         ", but got " + out.toString() + ".",
-                out.toString().compareTo(expected.toString()) == 0
+                out.size() == expected.size() && out.containsAll(expected)
         );
     }
 
