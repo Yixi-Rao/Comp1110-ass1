@@ -243,6 +243,50 @@ public class Dinosaurs {
      * @param tile The tile being placed
      */
     private void updateBoardStates(Tile tile) {
+        int x = tile.getLocation().getX();
+        int y = tile.getLocation().getY();
+        Orientation orientation = tile.getOrientation();
+        TileType type = tile.getTileType();
+        if (orientation == NORTH || orientation == SOUTH){
+            State state0 = type.stateFromOffset(0,0,orientation);
+            boardstates[y][x] = (boardstates[y][x]==GREEN || boardstates[y][x]==RED)?boardstates[y][x]:state0;
+            State state1 = type.stateFromOffset(1,0,orientation);
+            boardstates[y][x+1] = (boardstates[y][x+1]==GREEN || boardstates[y][x+1]==RED)?boardstates[y][x+1]:state1;
+            State state2 = type.stateFromOffset(0,1,orientation);
+            boardstates[y+1][x] = (boardstates[y+1][x]==GREEN || boardstates[y+1][x]==RED)?boardstates[y+1][x]:state2;
+            State state3 = type.stateFromOffset(1,1,orientation);
+            boardstates[y+1][x+1] = (boardstates[y+1][x+1]==GREEN || boardstates[y+1][x+1]==RED)?boardstates[y+1][x+1]:state3;
+            State state4 = type.stateFromOffset(0,2,orientation);
+            boardstates[y+2][x] = (boardstates[y+2][x]==GREEN || boardstates[y+2][x]==RED)?boardstates[y+2][x]:state4;
+            State state5 = type.stateFromOffset(1,2,orientation);
+            boardstates[y+2][x+1] = (boardstates[y+2][x+1]==GREEN || boardstates[y+2][x+1]==RED)?boardstates[y+2][x+1]:state5;
+        }else{
+            State state0 = type.stateFromOffset(0,0,orientation);
+            boardstates[y][x] = (boardstates[y][x]==GREEN || boardstates[y][x]==RED)?boardstates[y][x]:state0;
+            State state1 = type.stateFromOffset(1,0,orientation);
+            boardstates[y][x+1] = (boardstates[y][x+1]==GREEN || boardstates[y][x+1]==RED)?boardstates[y][x+1]:state1;
+            State state2 = type.stateFromOffset(2,0,orientation);
+            boardstates[y][x+2] = (boardstates[y][x+2]==GREEN || boardstates[y][x+2]==RED)?boardstates[y][x+2]:state2;
+            State state3 = type.stateFromOffset(0,1,orientation);
+            boardstates[y+1][x] = (boardstates[y+1][x]==GREEN || boardstates[y+1][x]==RED)?boardstates[y+1][x]:state3;
+            State state4 = type.stateFromOffset(1,1,orientation);
+            boardstates[y+1][x+1] = (boardstates[y+1][x+1]==GREEN || boardstates[y+1][x+1]==RED)?boardstates[y+1][x+1]:state4;
+            State state5 = type.stateFromOffset(2,1,orientation);
+            boardstates[y+1][x+2] = (boardstates[y+1][x+2]==GREEN || boardstates[y+1][x+2]==RED)?boardstates[y+1][x+2]:state5;
+
+        }
+
+        //State state = type.stateFromOffset(location.getX(),location.getY(),orientation);
+        //boardstates[location.getX()][location.getY()] = state;
+
+
+
+
+
+
+
+
+
         // FIXME Task 7 (part I)
     }
 
@@ -264,8 +308,15 @@ public class Dinosaurs {
      * the given location.
      */
     public State getLocationState(Location location) {
+        int x = location.getX();
+        int y = location.getY();
+        return boardstates[y][x];
+
+
+
+
         // FIXME Task 7 (part II)
-        return null;
+
     }
 
     /**
