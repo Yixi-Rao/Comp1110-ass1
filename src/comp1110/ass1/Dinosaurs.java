@@ -461,8 +461,8 @@ public class Dinosaurs {
      * and false otherwise.
      */
     public boolean violatesObjective(String placement) {
-        if (isPlacementConsistent(placement) == false || isPlacementDangerous(placement)){
-            return false;
+        if (isPlacementConsistent(placement) == false ){
+            return true;
         }
         String cnnective = objective.getConnectedIslands();
         Tile tile = new Tile(placement);
@@ -472,12 +472,32 @@ public class Dinosaurs {
             String twoRequire = cnnective.substring(i * 4, ((i + 1) * 4));
             State s1 = boardstates[connectiveLocation(twoRequire.charAt(1))][connectiveLocation(twoRequire.charAt(0))];
             State s2 = boardstates[connectiveLocation(twoRequire.charAt(3))][connectiveLocation(twoRequire.charAt(2))];
-            if (s1 != s2){
+            if (crossOri(connectiveLocation(twoRequire.charAt(0)),connectiveLocation(twoRequire.charAt(1)),connectiveLocation(twoRequire.charAt(2)),connectiveLocation(twoRequire.charAt(3)))== null)
+                continue;
+            if (isPlacementDangerous(placement))
+               return true;
+            if ((s1 == GREEN && s2 == EMPTY)||(s1 == RED && s2 == EMPTY)||(s2 == GREEN && s1 == EMPTY)||(s2 == RED && s1 == EMPTY)){
+
                 return  true;
             }
         }
         // FIXME Task 11
         return false;
+    }
+    public Tile crossOri(int x1,int y1,int x2,int y2) {
+        if (x1 < x2 && y1 < y2) {
+            return tiles[y1][x1];
+        }
+        else if (x1 > x2 && y1 > y2) {
+            return tiles[y2][x2];
+        }
+        else if (x1 > x2 && y1 < y2){
+            return tiles[y1][x1-1];
+        }
+        else {
+            return tiles[y1-1][x1];
+        }
+
     }
     public static int connectiveLocation(char c){
         int x = 0;
