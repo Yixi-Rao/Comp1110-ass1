@@ -362,14 +362,14 @@ public class Dinosaurs {
             }
         }
         else {
-            State[] states = {type.stateFromOffset(0,0,orientation),type.stateFromOffset(1,0,orientation), type.stateFromOffset(2,0,orientation),
-                              type.stateFromOffset(0,1,orientation), type.stateFromOffset(1,1,orientation),type.stateFromOffset(2,1,orientation)};
-            State[] states1 = {boardstates[y][x],boardstates[y][x+1], boardstates[y][x+2],
-                               boardstates[y+1][x], boardstates[y+1][x+1],boardstates[y+1][x+2]};
-            for (int i = 0;i < states.length;i++){
-                if (judgeIsland(states[i],states1[i]) == false){
-                    return false;
-                }
+                    State[] states = {type.stateFromOffset(0,0,orientation),type.stateFromOffset(1,0,orientation), type.stateFromOffset(2,0,orientation),
+                            type.stateFromOffset(0,1,orientation), type.stateFromOffset(1,1,orientation),type.stateFromOffset(2,1,orientation)};
+                    State[] states1 = {boardstates[y][x],boardstates[y][x+1], boardstates[y][x+2],
+                            boardstates[y+1][x], boardstates[y+1][x+1],boardstates[y+1][x+2]};
+                    for (int i = 0;i < states.length;i++){
+                        if (judgeIsland(states[i],states1[i]) == false){
+                            return false;
+                        }
             }
         }
 
@@ -406,8 +406,45 @@ public class Dinosaurs {
      * between red and green dinosaurs.
      */
     public boolean isPlacementDangerous(String placement) {
+        Tile tile = new Tile(placement);
+        Orientation orientation = tile.getOrientation();
+        TileType type = tile.getTileType();
+        int x = tile.getLocation().getX();
+        int y = tile.getLocation().getY();
+        if (orientation == NORTH || orientation == SOUTH){
+            State[] states = {type.stateFromOffset(0,0,orientation),type.stateFromOffset(1,0,orientation),
+                              type.stateFromOffset(0,1,orientation),type.stateFromOffset(1,1,orientation),
+                              type.stateFromOffset(0,2,orientation),type.stateFromOffset(1,2,orientation)};
+            State[] states1 = {boardstates[y][x],boardstates[y][x+1],
+                               boardstates[y+1][x],boardstates[y+1][x+1],
+                               boardstates[y+2][x],boardstates[y+2][x+1]};
+            for (int i = 0;i < states.length;i++){
+                if (judgeDinosaurs(states[i],states1[i]) == true){
+                    return true;
+                }
+            }
+        }
+        else {
+            State[] states = {type.stateFromOffset(0,0,orientation),type.stateFromOffset(1,0,orientation), type.stateFromOffset(2,0,orientation),
+                    type.stateFromOffset(0,1,orientation), type.stateFromOffset(1,1,orientation),type.stateFromOffset(2,1,orientation)};
+            State[] states1 = {boardstates[y][x],boardstates[y][x+1], boardstates[y][x+2],
+                    boardstates[y+1][x], boardstates[y+1][x+1],boardstates[y+1][x+2]};
+            for (int i = 0;i < states.length;i++){
+                if (judgeDinosaurs(states[i],states1[i]) == true){
+                    return true;
+                }
+            }
+        }
         // FIXME Task 10
         return false;
+    }
+    public static Boolean judgeDinosaurs(State s1,State s2){
+        if ((s1 == GREEN && s2 == RED)||(s1 == RED && s2 == GREEN )){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -424,8 +461,39 @@ public class Dinosaurs {
      * and false otherwise.
      */
     public boolean violatesObjective(String placement) {
+        if (isPlacementConsistent(placement) == false || isPlacementDangerous(placement)){
+            return false;
+        }
+        String cnnective = objective.getConnectedIslands();
+        Tile tile = new Tile(placement);
+        updateBoardStates(tile);
+
+        for (int i = 0; i < cnnective.length()/4; i++){
+            String twoRequire = cnnective.substring(i * 4, ((i + 1) * 4));
+            State s1 = boardstates[connectiveLocation(twoRequire.charAt(1))][connectiveLocation(twoRequire.charAt(0))];
+            State s2 = boardstates[connectiveLocation(twoRequire.charAt(3))][connectiveLocation(twoRequire.charAt(2))];
+            if (s1 != s2){
+                return  true;
+            }
+        }
         // FIXME Task 11
         return false;
+    }
+    public static int connectiveLocation(char c){
+        int x = 0;
+        switch (c){
+            case '0':
+                x = 0;break;
+            case '1':
+                x = 1;break;
+            case '2':
+                x = 2;break;
+            case '3':
+                x = 3;break;
+            case '4':
+                x = 4;break;
+        }
+        return x;
     }
 
     /**
