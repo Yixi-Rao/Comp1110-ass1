@@ -342,8 +342,58 @@ public class Dinosaurs {
      * tiles, and False if it is inconsistent.
      */
     public boolean isPlacementConsistent(String placement) {
+        Tile tile = new Tile(placement);
+        Orientation orientation = tile.getOrientation();
+        TileType type = tile.getTileType();
+        int x = tile.getLocation().getX();
+        int y = tile.getLocation().getY();
+
+        if (orientation == NORTH || orientation == SOUTH){
+            State[] states = {type.stateFromOffset(0,0,orientation),type.stateFromOffset(1,0,orientation),
+                              type.stateFromOffset(0,1,orientation),type.stateFromOffset(1,1,orientation),
+                              type.stateFromOffset(0,2,orientation),type.stateFromOffset(1,2,orientation)};
+            State[] states1 = {boardstates[y][x],boardstates[y][x+1],
+                               boardstates[y+1][x],boardstates[y+1][x+1],
+                               boardstates[y+2][x],boardstates[y+2][x+1]};
+            for (int i = 0;i < states.length;i++){
+                if (judgeIsland(states[i],states1[i]) == false){
+                    return false;
+                }
+            }
+        }
+        else {
+            State[] states = {type.stateFromOffset(0,0,orientation),type.stateFromOffset(1,0,orientation), type.stateFromOffset(2,0,orientation),
+                              type.stateFromOffset(0,1,orientation), type.stateFromOffset(1,1,orientation),type.stateFromOffset(2,1,orientation)};
+            State[] states1 = {boardstates[y][x],boardstates[y][x+1], boardstates[y][x+2],
+                               boardstates[y+1][x], boardstates[y+1][x+1],boardstates[y+1][x+2]};
+            for (int i = 0;i < states.length;i++){
+                if (judgeIsland(states[i],states1[i]) == false){
+                    return false;
+                }
+            }
+        }
+
         // FIXME Task 9
-        return false;
+        return true;
+    }
+    public static boolean judgeIsland(State s1,State s2){
+        if (s1 == WATER){
+            if (s2 == WATER){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (s2 == WATER){
+                return false;
+            }
+            else {
+                return true;
+            }
+
+        }
     }
 
     /**

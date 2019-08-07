@@ -1,5 +1,7 @@
 package comp1110.ass1;
 
+import java.util.Random;
+
 /**
  * An objective defines what the player must attempt to solve.   It is expressed
  * in terms of two parts:
@@ -380,8 +382,25 @@ public class Objective {
      */
     public static Objective newObjective(int difficulty) {
         assert difficulty >= 0 && difficulty <= 3;
+        int num=0;
+        Random r = new Random();
+        switch (difficulty){
+            case 0:
+                num = r.nextInt(20);
+                break;
+            case 1:
+                num = 20 + r.nextInt(20);
+                break;
+            case 2:
+                num = 40 + r.nextInt(20);
+                break;
+            case 3:
+                num = 60 + r.nextInt(20);
+                break;
 
-        return OBJECTIVES[0]; // FIXME Task 8
+        }
+
+        return OBJECTIVES[num]; // FIXME Task 8
     }
 
     public String getConnectedIslands() {
