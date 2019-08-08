@@ -200,6 +200,7 @@ public class Game extends Application {
                     hideCompletion();
                     rotate();
                     event.consume();
+                    checkCompletion();
                 }
             });
             setOnMousePressed(event -> {      // mouse press indicates begin of drag

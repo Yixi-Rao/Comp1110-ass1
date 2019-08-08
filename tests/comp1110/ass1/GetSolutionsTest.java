@@ -4,9 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -14,9 +12,25 @@ public class GetSolutionsTest {
     @Rule
     public Timeout globalTimeout = Timeout.millis(1000);
 
+    private String normalizePlacement(String placement) {
+      Set<String> placements = new HashSet<>();
+      for (int i = 0; i < placement.length(); i += 4) {
+        placements.add(placement.substring(i, i + 4));
+      }
+      List<String> sortedPlacements = new ArrayList<>(placements);
+      Collections.sort(sortedPlacements);
+      String rtn = "";
+      for (String p : sortedPlacements)
+        rtn += p;
+      return rtn;
+    }
+
     private void test(Objective obj, Set<String> expected) {
-        Dinosaurs game = new Dinosaurs(obj);
-        Set<String> out = game.getSolutions();
+      Set<String> out = new HashSet<>();
+      Dinosaurs game = new Dinosaurs(obj);
+      Set<String> raw = game.getSolutions();
+      for (String r : raw)
+        out.add(normalizePlacement(r));
 
       for (String e : expected) {
         assertTrue("Expected " + e +
@@ -163,6 +177,6 @@ public class GetSolutionsTest {
             {"a01Eb02Wc22Ed21We20Ef00W"},
             {"a11Sb00Wc20Ed01Se31Nf21N"},
             {"a21Eb22Wc01Sd11Ne00Ef20W"},
-            {"a11Sb20Wc01Sd00Ee21Wf22W"},
+            {"a00Wb30Nc01Wd20Ne22Ef02W"},
     };
 }

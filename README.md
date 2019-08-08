@@ -16,7 +16,7 @@ from elsewhere.
 Please read the ANU's [official position](http://academichonesty.anu.edu.au/) on
 academic honesty. If you have any questions, please ask me.
 
-Carefully review the [statement of originality](originality.md) which you must
+Carefully review the [statement of originality](originality.yml) which you must
 complete.  Edit that statement and update it as you complete the assignment,
 ensuring that when you complete the assignment, a truthful statement is committed
 and pushed to your repo.
