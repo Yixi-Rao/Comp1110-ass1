@@ -1,5 +1,6 @@
 package comp1110.ass1;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -464,26 +465,34 @@ public class Dinosaurs {
         if (isPlacementConsistent(placement) == false ){
             return true;
         }
-        String cnnective = objective.getConnectedIslands();
         Tile tile = new Tile(placement);
-        updateBoardStates(tile);
-
-        for (int i = 0; i < cnnective.length()/4; i++){
-            String twoRequire = cnnective.substring(i * 4, ((i + 1) * 4));
-            State s1 = boardstates[connectiveLocation(twoRequire.charAt(1))][connectiveLocation(twoRequire.charAt(0))];
-            State s2 = boardstates[connectiveLocation(twoRequire.charAt(3))][connectiveLocation(twoRequire.charAt(2))];
+        addTileToBoard(placement);
+        String connective = objective.getConnectedIslands();
+        String  initial = objective.getInitialState();
+        String[] states = new String[(initial.length()/4)];
+        for (int i = 0; i < initial.length()/4; i++){
+            String state = connective.substring(i * 4, ((i + 1) * 4));
+            states[i] = state;
+        }
+        for (int i = 0; i < connective.length()/4; i++){
+            String twoRequire = connective.substring(i * 4, ((i + 1) * 4));
             if (crossOri(connectiveLocation(twoRequire.charAt(0)),connectiveLocation(twoRequire.charAt(1)),connectiveLocation(twoRequire.charAt(2)),connectiveLocation(twoRequire.charAt(3)))== null)
                 continue;
-            if (isPlacementDangerous(placement))
-               return true;
-            if ((s1 == GREEN && s2 == EMPTY)||(s1 == RED && s2 == EMPTY)||(s2 == GREEN && s1 == EMPTY)||(s2 == RED && s1 == EMPTY)){
-
-                return  true;
+            for (int j = 0;j<states.length;j++) {
+                System.out.println(0);
+                if (stateConnective(states[j]) == ""){
+                    return true;
+                }
+                if (connective.indexOf(stateConnective(states[j])) == -1 )
+                    return true;
+                System.out.println(states[j]);
             }
         }
-        // FIXME Task 11
         return false;
     }
+        // FIXME Task 11
+
+
     public Tile crossOri(int x1,int y1,int x2,int y2) {
         if (x1 < x2 && y1 < y2) {
             return tiles[y1][x1];
@@ -514,6 +523,81 @@ public class Dinosaurs {
                 x = 4;break;
         }
         return x;
+    }
+    public String stateConnective(String s1){
+        Tile tile = new Tile(s1);
+        TileType type = tile.getTileType();
+        Orientation o = tile.getOrientation();
+        int x = tile.getLocation().getX();
+        int y = tile.getLocation().getY();
+        String k = "";
+        switch (type){
+            case A:
+                return "";
+            case B:
+                switch (o){
+                    case NORTH:
+                        k=""+x+1+""+y+""+x+""+y+1+""+x+""+y+1+""+x+1+""+y+2;break;
+                    case SOUTH:
+                        k=""+x+""+y+""+x+1+""+y+1+""+x+1+""+y+1+""+x+""+y+2;break;
+                    case EAST:
+                        k=""+x+1+""+y+""+x+""+y+1+""+x+1+""+y+""+x+2+""+y+1;break;
+                    case WEST:
+                        k=""+x+""+y+""+x+1+""+y+1+""+x+2+""+y+""+x+1+""+y+1;break;
+                }
+                break;
+            case C:
+                switch (o){
+                    case NORTH:
+                        k=""+x+""+y+""+x+1+""+y+1+"";break;
+                    case SOUTH:
+                        k=""+x+""+y+1+""+x+1+""+y+2+"";break;
+                    case EAST:
+                        k=""+x+2+""+y+""+x+1+""+y+1+"";break;
+                    case WEST:
+                        k=""+x+1+""+y+""+x+""+y+1+"";break;
+                }break;
+            case D:{
+                switch (o){
+                    case NORTH:
+                        k=""+x+""+y+""+x+1+""+y+1+"";break;
+                    case SOUTH:
+                        k=""+x+""+y+1+""+x+1+""+y+2+"";break;
+                    case EAST:
+                        k=""+x+2+""+y+""+x+1+""+y+1+"";break;
+                    case WEST:
+                        k=""+x+1+""+y+""+x+""+y+1+"";break;
+                }
+            }
+            break;
+            case E:{
+                switch (o){
+                    case NORTH:
+                        return k=""+x+1+""+y+1+""+x+2+""+y+"";
+                    case SOUTH:
+                        return k=""+x+1+""+y+""+x+""+y+1+"";
+                    case EAST:
+                        return k=""+x+""+y+""+x+1+""+y+1+"";
+                    case WEST:
+                        return k=""+x+1+""+y+""+x+2+""+y+1+"";
+                }
+            }
+            break;
+            case F:{
+                switch (o){
+                    case NORTH:
+                        return k=""+x+1+""+y+""+x+""+y+1+"";
+                    case SOUTH:
+                        return k=""+x+1+""+y+1+""+x+""+y+2+"";
+                    case EAST:
+                        return k=""+x+1+""+y+""+x+2+""+y+1+"";
+                    case WEST:
+                        return k=""+x+""+y+""+x+1+""+y+1+"";
+                }
+            }
+        }
+        return k;
+
     }
 
     /**
