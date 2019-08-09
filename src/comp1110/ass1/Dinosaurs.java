@@ -471,21 +471,21 @@ public class Dinosaurs {
         String  initial = objective.getInitialState();
         String[] states = new String[(initial.length()/4)];
         for (int i = 0; i < initial.length()/4; i++){
-            String state = connective.substring(i * 4, ((i + 1) * 4));
+            String state = initial.substring(i * 4, ((i + 1) * 4));
             states[i] = state;
         }
         for (int i = 0; i < connective.length()/4; i++){
             String twoRequire = connective.substring(i * 4, ((i + 1) * 4));
-            if (crossOri(connectiveLocation(twoRequire.charAt(0)),connectiveLocation(twoRequire.charAt(1)),connectiveLocation(twoRequire.charAt(2)),connectiveLocation(twoRequire.charAt(3)))== null)
+            if (crossOri(connectiveLocation(twoRequire.charAt(0)),connectiveLocation(twoRequire.charAt(1)),connectiveLocation(twoRequire.charAt(2)),connectiveLocation(twoRequire.charAt(3)))== null){
                 continue;
-            for (int j = 0;j<states.length;j++) {
-                System.out.println(0);
-                if (stateConnective(states[j]) == ""){
+            }
+            for (String j :states) {
+                System.out.println(1);
+                if (stateConnective(j).equals("")){
                     return true;
                 }
-                if (connective.indexOf(stateConnective(states[j])) == -1 )
+                if (connective.indexOf(stateConnective(j)) == -1 )
                     return true;
-                System.out.println(states[j]);
             }
         }
         return false;
