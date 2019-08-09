@@ -83,6 +83,7 @@ public class Dinosaurs {
         for (int i = 0; i < boardState.length()/4; i++) {
             String placement = boardState.substring(i * 4, ((i + 1) * 4));
             addTileToBoard(placement);
+
         }
     }
 
@@ -468,7 +469,7 @@ public class Dinosaurs {
         Tile tile = new Tile(placement);
         addTileToBoard(placement);
         String connective = objective.getConnectedIslands();
-        String  initial = objective.getInitialState();
+        String initial = objective.getInitialState();
         String[] states = new String[(initial.length()/4)];
         for (int i = 0; i < initial.length()/4; i++){
             String state = initial.substring(i * 4, ((i + 1) * 4));
@@ -479,8 +480,12 @@ public class Dinosaurs {
             if (crossOri(connectiveLocation(twoRequire.charAt(0)),connectiveLocation(twoRequire.charAt(1)),connectiveLocation(twoRequire.charAt(2)),connectiveLocation(twoRequire.charAt(3)))== null){
                 continue;
             }
+            State s1 = boardstates[connectiveLocation(twoRequire.charAt(1))][connectiveLocation(twoRequire.charAt(0))];
+            State s2 = boardstates[connectiveLocation(twoRequire.charAt(3))][connectiveLocation(twoRequire.charAt(2))];
+            if ((s1 == GREEN && s2 == EMPTY)||(s1 == RED && s2 == EMPTY)||(s2 == GREEN && s1 == EMPTY)||(s2 == RED && s1 == EMPTY)){
+                return  true;
+            }
             for (String j :states) {
-                System.out.println(1);
                 if (stateConnective(j).equals("")){
                     return true;
                 }
@@ -597,7 +602,6 @@ public class Dinosaurs {
             }
         }
         return k;
-
     }
 
     /**
@@ -613,6 +617,8 @@ public class Dinosaurs {
      * @return A set of strings, each representing a tile placement
      */
     public Set<String> findCandidatePlacements(Location targetLoc) {
+        String connective = objective.getConnectedIslands();
+        String initial = objective.getInitialState();
         // FIXME Task 12
         return new HashSet<>();
     }
